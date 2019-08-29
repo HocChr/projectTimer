@@ -10,8 +10,8 @@ time_step = 60  # in seconds
 
 firstBreakBegin = 3600 * 6  # in seconds
 firstBreakEnd = 3600 * 6.5
-secondBreakBegin = 3600 * 9
-secondBreakEnd = 3600 * 9.25
+secondBreakBegin = 3600 * 9 + 3600 * 0.5
+secondBreakEnd = 3600 * 9.25 + 3600 * 0.5
 
 
 def getCurrentProj():

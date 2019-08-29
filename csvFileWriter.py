@@ -1,4 +1,6 @@
 import csv
+import os
+from shutil import copy2
 
 # ---Zu Debug-Zwecken. Gehört wieder entfernt----------------------------------------------------------------------------
 #import logging
@@ -16,15 +18,36 @@ import csv
 
 class CsvWriter:
     def __init__(self, initialTime, timeStep):
+        self._cwd = os.getcwd()
         self._timeStep = timeStep
         self._initialTime = initialTime
         self._projRunTime = 0.0
         self._currentProj = ""
         self.file_name = initialTime.month + initialTime.year + '.csv'
+        self._folder = self._cwd + '\\' + self._initialTime.month + self._initialTime.year
+        self._initialTime = initialTime
         self.fieldnames = ['Project']
+        self._makeBackupFileIfExists()
         for i in range(1, 32):
             self.fieldnames.append(i)
         self.readData = dict(dict())
+
+    def _makeBackupFileIfExists(self):
+        self._createFolderIfNotExists()
+        self._copyYesterdaysFileIfExists()
+
+    def _createFolderIfNotExists(self):
+        if not os.path.isdir(self._folder):
+            try:
+                os.makedirs(self._folder)
+            except OSError:
+                print("Creation of the directory %s failed" % self._folder)
+
+    def _copyYesterdaysFileIfExists(self):
+        filePath = self._cwd + '\\' + self.file_name
+        dest = self._folder + '\\' + self._initialTime.day_of_month + self.file_name
+        if os.path.isfile(filePath):
+            copy2(filePath, dest)
 
     def write_current_time(self, currentProj):
         #logger.info('begin write_current_time')

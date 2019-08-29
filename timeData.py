@@ -11,7 +11,6 @@ class time_data:
     hour = ''
     minute = ''
 
-
 def get_time_date():
     time_ = time_data()
     time_.date         = datetime.datetime.now()
@@ -24,7 +23,6 @@ def get_time_date():
     time_.minute       = time_.date.strftime('%M')
     return time_
 
-
 def get_time_date_from(date):
     time_ = time_data()
     time_.date         = date
@@ -36,7 +34,6 @@ def get_time_date_from(date):
     time_.hour         = time_.date.strftime('%H')
     time_.minute       = time_.date.strftime('%M')
     return time_
-
 
 # -returns 0 if days differ
 def getDurationInSeconds(time1, time2):
@@ -53,7 +50,6 @@ def getDurationInHours(time1, time2):
     days = getDurationInDays(time1, time2)
     hours = divmod(seconds, 3600)[0]
     return (days*24) + hours
-
 
 def format_data(data):
     formated_data = [list()]
