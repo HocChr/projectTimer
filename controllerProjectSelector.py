@@ -1,6 +1,7 @@
 from os import path
 
 import projSelectorUi
+import time
 
 
 def getProjList():
@@ -43,9 +44,18 @@ class Controller:
         if not projSelectorUi.deleteme(self._currProj):
             self._ui.run()
 
+    def _wait_if_necessary(self):
+        duration = self._ui.get_duration()
+        if duration is not 'aus':
+            time.sleep(float(duration)*3600)
+            saveCurrentProj(self._currProj)
+
     def _onOkay(self):
-        saveCurrentProj(self._ui.getSelectedProj())
+        selected_project = self._ui.getSelectedProj()
+        saveCurrentProj(selected_project)
         setProjList(self._ui.getProjList())
+
+        self._wait_if_necessary()
 
 
 controller = Controller()

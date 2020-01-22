@@ -1,0 +1,9 @@
+*.spec
+*.spec*(symlink)
+*.pyc
+__pycache__/
+stockchecker/build/
+dist/
+*.csv
+internal/
+build/
